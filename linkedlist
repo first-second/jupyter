@@ -1,0 +1,65 @@
+class Node:
+	def __init__(self,dataval):
+		self.dataval=dataval
+		self.nextval=None
+class LinkedList:
+	def __init__(self):
+		self.headval=None
+	def printList(self):
+		printval=self.headval
+		while printval:
+			print(printval.dataval)
+			printval=printval.nextval
+	def atbegin(self,newval):
+		newnode=Node(newval)
+		newnode.nextval=self.headval
+		self.headval=newnode
+	def atlast(self,newval):
+		newnode=Node(newval)
+		if self.headval==None:
+			self.headval=newnode
+			return
+		laste=self.headval
+		while laste.nextval:
+			laste=laste.nextval
+		laste.nextval=newnode
+	def between(self,middlenode,newval):
+		newnode=Node(newval)
+		if middlenode is None:
+			print("not found")
+			return
+		newnode.nextval=middlenode.nextval
+		middlenode.nextval=newnode
+	def remove(self,removeval):
+		head=self.headval
+		if head==None:
+			return
+		while head is not None:
+			if head.dataval==removeval:
+				print("found")
+				break
+			prev=head
+			head=head.nextval
+		prev.nextval=head.nextval
+		head=None
+
+if __name__ == '__main__':
+	list1=LinkedList()
+	list1.headval=Node("mon")
+	e2=Node("tue")
+	e3=Node("wed")
+	list1.headval.nextval=e2
+	e2.nextval=e3
+	list1.printList()
+	print("=======")
+	list1.atbegin("sun")
+	list1.printList()
+	print("=======")
+	list1.atlast("thur")
+	list1.printList()
+	print("=======")
+	list1.between(list1.headval.nextval,"sat")
+	list1.printList()
+	print("=======")
+	list1.remove("sun")
+	list1.printList()
